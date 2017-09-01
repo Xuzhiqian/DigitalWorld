@@ -8,7 +8,7 @@ Entity::Entity(const char *name) {
     if (!handle) {
         crash("failed loading shared library");
     }
-    update = (void(*)(Entity*))dlsym(handle, "act");
+    act = (void(*)(Entity*))dlsym(handle, "act");
     if (!handle) {
         crash("invalid shared library for entity");
     }
@@ -18,6 +18,6 @@ Entity::Entity(const char *name) {
 Entity::~Entity() {
 }
 
-void Act::Act() {
+void Entity::Act() {
     act(this);
 }
