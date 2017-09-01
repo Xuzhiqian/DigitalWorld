@@ -5,11 +5,12 @@
 
 class World {
     public:
-        World(std::string name);
+        World(const char *name);
         ~World();
         void Update();
     private:
         int time;
+        void (*update)(World *world);
 };
 
 #endif
