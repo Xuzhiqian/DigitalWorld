@@ -1,9 +1,11 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include <string>
+
 class World {
     public:
-        World(const char *name);
+        World(std::String name);
         ~World();
         Update();
     private:
