@@ -19,5 +19,6 @@ World::~World() {
 }
 
 void World::Update() {
+    time++;
     update(this);
 }
