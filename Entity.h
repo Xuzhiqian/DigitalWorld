@@ -5,11 +5,12 @@
 
 class Entity {
     public:
-        Entity(std::string name);
+        Entity(const char *name);
         ~Entity();
         void Act();
     private:
         int energy;
+        void (*)act(Entity *entity);
 };
 
 #endif
