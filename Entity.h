@@ -10,7 +10,7 @@ class Entity {
         void Act();
     private:
         int energy;
-        void (*)act(Entity *entity);
+        void (*act)(Entity *entity);
 };
 
 #endif
