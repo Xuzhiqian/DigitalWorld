@@ -5,9 +5,9 @@
 
 class World {
     public:
-        World(std::String name);
+        World(std::string name);
         ~World();
-        Update();
+        void Update();
     private:
         int time;
 };

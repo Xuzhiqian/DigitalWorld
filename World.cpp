@@ -5,10 +5,13 @@
 #include "World.h"
 #include "util.h"
 
-World::World(std::String name) {
+World::World(std::string name) {
     log("World::World called");
 }
 
-World::Update() {
+World::~World() {
+}
+
+void World::Update() {
     log("World::Update called");
 }
