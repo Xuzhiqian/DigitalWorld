@@ -9,12 +9,13 @@ World::World(const char *name) {
     log("World::World called");
     void *handle = dlopen(name, RTLD_LAZY);
     if (!handle) {
-        crash(dlerror());
+        crash("failed loading shared library");
     }
     update = (void(*)(World*))dlsym(handle, "update");
     if (!handle) {
         crash("invalid shared library for world");
     }
+    dlclose(handle);
 }
 
 World::~World() {
