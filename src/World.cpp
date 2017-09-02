@@ -89,10 +89,8 @@ void World::TakeActionMove(Entity &entity, int dx, int dy) {
 }
 
 void World::TakeActionEat(Entity &entity) {
-    std::cout << "!!!!" << grids[entity.posiX][entity.posiY].energy << endl;
     entity.energy += grids[entity.posiX][entity.posiY].energy;
     grids[entity.posiX][entity.posiY].energy = 0;
-    std::cout << "!!!!" <<  grids[entity.posiX][entity.posiY].energy<< endl;
 }
 
 void World::SetSize(int sizeX, int sizeY) {
