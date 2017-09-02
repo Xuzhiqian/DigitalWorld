@@ -34,3 +34,11 @@ void World::CreateEntity(const char *name) {
     Entity entity(name);
     entities.push_back(entity);
 }
+
+int World::getMaxX() const {
+    return max_x;
+}
+
+int World::getMaxY() const {
+    return max_y;
+}

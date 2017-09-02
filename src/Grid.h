@@ -8,10 +8,10 @@ using namespace std;
 
 class Grid {
     public:
-    private:
         int energy;
         int height;
         vector<Entity> entities;
+    private:
 };
 
 #endif
