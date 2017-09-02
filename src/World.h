@@ -13,15 +13,13 @@ class World {
         ~World();
         void Update();
         void CreateEntity(const char *name);
-        int getMaxX() const;
-        int getMaxY() const;
-        vector< vector<Grid> > grids;
     private:
         int time;
         int max_x, max_y;
         void (*init)(World *world);
         void (*update)(World *world);
         vector<Entity> entities;
+        vector< vector<Grid> > grids;
 };
 
 #endif
