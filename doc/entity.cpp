@@ -31,6 +31,8 @@ extern "C" Action act(Entity &entity) {
     int h = entity.SenseHeight(x, y);
     // 得到你的坐标，结果存入x和y
     SensePosition(x, y);
+    // 得到世界的大小
+    SenseWorldSize(x, y);
 
     /*
      * 下面说说Action。

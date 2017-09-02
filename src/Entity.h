@@ -13,6 +13,7 @@ class Entity {
         std::function<int(int, int)> SenseEnergy;
         std::function<int(int, int)> SenseHeight;
         std::function<void(int&, int&)> SensePosition;
+        std::function<void(int&, int&)> SenseWorldSize;
 
     private:
         int energy;
