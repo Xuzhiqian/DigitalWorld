@@ -42,7 +42,11 @@ int World::CreateEntity(const char *name) {
     entity.SetPosi(x, y);
    
     entity.energy = config::initial_energy;
+
+    // Set interface functions
     entity.SenseEnergy = [this](int x, int y){ return this->GetEnergy(x, y); };
+    entity.SenseHeight = [this](int x, int y){ return this->GetHeight(x, y); };
+    entity.SensePosition = [&entity](int &x, int &y){ x = entity.posiX, y = entity.posiY;};
 
     entities.push_back(entity);
 }

@@ -15,6 +15,8 @@ class Entity {
         void SetPosi(int x, int y);
 
         std::function<int(int, int)> SenseEnergy;
+        std::function<int(int, int)> SenseHeight;
+        std::function<void(int&, int&)> SensePosition;
 
     private:
         int energy;
