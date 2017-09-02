@@ -14,8 +14,8 @@ World::World(const char *name, int max_x, int max_y) {
     if (!init || !update) {
         crash("invalid shared library for world");
     }
-    this->max_x = max_x;
-    this->max_y = max_y;
+    this->maxX = max_x;
+    this->maxY = max_y;
     
     grids = vector< vector<Grid> >(max_x, vector<Grid>(max_y));
     init(this);
@@ -28,7 +28,7 @@ void World::Update() {
     update(this);
     for (auto e: entities) {
         Action action = e.Act();
-        take_action(e, action);
+        TakeAction(e, action);
     }
     log("world updated");
 }
@@ -37,7 +37,7 @@ int World::CreateEntity(const char *name) {
     entities.push_back(Entity(name));
 }
 
-void World::take_action(Entity entity, Action action) {
+void World::TakeAction(Entity entity, Action action) {
     switch(action.type) {
         case Move:
             break;
