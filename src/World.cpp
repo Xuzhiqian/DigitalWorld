@@ -24,11 +24,5 @@ World::~World() {
 }
 
 void World::Update() {
-    time++;
     update(this);
-}
-
-void World::CreateEntity(const char *name) {
-    Entity entity(name);
-    entities.push_back(entity);
 }
