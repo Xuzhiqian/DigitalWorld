@@ -3,6 +3,7 @@
 #include "../src/Action.h"
 
 #include <iostream>
+using namespace std;
 #include <cstdlib>
 
 static int size_x, size_y;
@@ -15,7 +16,7 @@ extern "C" Action act(Entity &entity) {
     Action action;
     int x, y;
     entity.SensePosition(x, y);
-    if (x > 0) {
+    if (y > 0) {
         action.type = Move;
         action.param.direction = Left;
     } else {

@@ -23,7 +23,7 @@ class Entity {
         Action (*act)(Entity &entity);
 
         Action Act();
-        void SetPosi(int x, int y);
+        void SetPosition(int x, int y);
         
         friend class World;
 };

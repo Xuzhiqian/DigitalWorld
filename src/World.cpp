@@ -15,7 +15,12 @@ World::World(const char *name) {
     if (!init || !update) {
         crash("invalid shared library for world");
     }
-    init(*this); }
+    sizeX = sizeY = -1;
+    init(*this);
+    if (sizeX < 0 || sizeY < 0) {
+        crash("invalid shared library for world");
+    }
+}
 
 World::~World() {
 }
@@ -38,7 +43,7 @@ int World::CreateEntity(const char *name) {
         y = rand()%sizeY;
     } while(grids[x][y].occupied);
     grids[x][y].occupied = true;
-    entity.SetPosi(x, y);
+    entity.SetPosition(x, y);
    
     entity.energy = config::initial_energy;
 
@@ -58,10 +63,10 @@ void World::TakeAction(Entity &entity, Action action) {
         case Move:
             switch(action.param.direction) {
                 case Up:
-                    TakeActionMove(entity, 0, 1);
+                    TakeActionMove(entity, 0, -1);
                     break;
                 case Down:
-                    TakeActionMove(entity, 0, -1);
+                    TakeActionMove(entity, 0, +1);
                     break;
                 case Left:
                     TakeActionMove(entity, -1, 0);
@@ -86,7 +91,7 @@ void World::TakeActionMove(Entity &entity, int dx, int dy) {
         grids[tx][ty].occupied = true;
         grids[entity.posiX][entity.posiY].occupied = false;
         entity.energy -= config::move_cost(grids[tx][ty].height - grids[entity.posiX][entity.posiY].height);
-        entity.SetPosi(tx, ty);
+        entity.SetPosition(tx, ty);
     }
 }
 

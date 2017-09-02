@@ -2,7 +2,7 @@
 #include "../src/WorldAPI.h"
 
 #define MAX_X 10
-#define MAX_Y 10
+#define MAX_Y 5
 
 extern "C" void init(World &world) {
     world.SetSize(MAX_X, MAX_Y);
@@ -12,10 +12,8 @@ extern "C" void init(World &world) {
             world.SetEnergy(i, j, 2);
         }
     }
-    log("default world initialized");
 }
 
 extern "C" void update(World &world) {
     world.SetEnergy(0, 0, world.GetEnergy(0, 0) + 5);
-    log("default world updated");
 }

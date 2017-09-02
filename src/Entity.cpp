@@ -24,7 +24,7 @@ Action Entity::Act() {
     return act(*this);
 }
 
-void Entity::SetPosi(int x, int y) {
+void Entity::SetPosition(int x, int y) {
     posiX = x;
     posiY = y;
 }
