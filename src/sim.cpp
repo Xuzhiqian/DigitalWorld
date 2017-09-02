@@ -7,9 +7,9 @@ using namespace std;
 void ShowWorld(const World &world) {
     int sizeX, sizeY;
     world.GetSize(sizeX, sizeY);
-    for (int i = 0; i < sizeX; ++i) {
-        for (int j = 0; j < sizeY; ++j) {
-            putchar(world.IsOccupied(i, j)?'X':'O');
+    for (int y = 0; y < sizeY; ++y) {
+        for (int x = 0; x < sizeX; ++x) {
+            putchar(world.IsOccupied(x, y)?'X':'O');
         }
         putchar('\n');
     }

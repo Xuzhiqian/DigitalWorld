@@ -28,7 +28,6 @@ void World::Update() {
         Action action = e.Act();
         TakeAction(e, action);
     }
-    log("world updated");
 }
 
 int World::CreateEntity(const char *name) {

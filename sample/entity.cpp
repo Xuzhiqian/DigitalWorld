@@ -2,36 +2,25 @@
 #include "../src/EntityAPI.h"
 #include "../src/Action.h"
 
+#include <iostream>
 #include <cstdlib>
 
+static int size_x, size_y;
+
 extern "C" void init(Entity &entity) {
-    log("default entity initialized");
+    entity.SenseWorldSize(size_x, size_y);
 }
 
 extern "C" Action act(Entity &entity) {
     Action action;
-    switch (rand()%2) {
-        case 0:
-            action.type = Move;
-            switch(rand()%4) {
-                case 0:
-                    action.param.direction = Up;
-                    break;
-                case 1:
-                    action.param.direction = Down;
-                    break;
-                case 2:
-                    action.param.direction = Left;
-                    break;
-                case 3:
-                    action.param.direction = Right;
-                    break;
-            }
-            break;
-        case 1:
-            action.type = Eat;
-            break;
+    int x, y;
+    entity.SensePosition(x, y);
+    if (x > 0) {
+        action.type = Move;
+        action.param.direction = Left;
+    } else {
+        action.type = Move;
+        action.param.direction = Right;
     }
-    log("default entity acted");
     return action;
 }
