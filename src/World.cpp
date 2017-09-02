@@ -9,19 +9,19 @@ World::World(const char *name) {
     if (!handle) {
         crash("failed loading shared library");
     }
-    init = (void(*)(World*))dlsym(handle, "init");
-    update = (void(*)(World*))dlsym(handle, "update");
+    init = (void(*)(World&))dlsym(handle, "init");
+    update = (void(*)(World&))dlsym(handle, "update");
     if (!init || !update) {
         crash("invalid shared library for world");
     }
-    init(this);
+    init(*this);
 }
 
 World::~World() {
 }
 
 void World::Update() {
-    update(this);
+    update(*this);
     for (auto &e: entities) {
         Action action = e.Act();
         TakeAction(e, action);
@@ -89,4 +89,33 @@ void World::SetSize(int sizeX, int sizeY) {
     this->sizeX = sizeX;
     this->sizeY = sizeY;
     grids = vector< vector< Grid > >(sizeX, vector<Grid>(sizeY));
+}
+
+void World::SetHeight(int x, int y, int h) {
+    grids[x][y].height = h;
+}
+
+void World::SetEnergy(int x, int y, int e) {
+    grids[x][y].energy = e;
+}
+
+void World::GetSize(int &sizeX, int &sizeY) const {
+    sizeX = this->sizeX;
+    sizeY = this->sizeY;
+}
+
+int World::GetHeight(int x, int y) const {
+    return grids[x][y].height;
+}
+
+int World::GetEnergy(int x, int y) const {
+    return grids[x][y].energy;
+}
+
+const vector< Entity > & World::GetEntities() const{
+    return entities;
+}
+
+bool World::IsOccupied(int x, int y) const {
+    return grids[x][y].occupied;
 }

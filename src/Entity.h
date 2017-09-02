@@ -12,8 +12,8 @@ class Entity {
         int energy;
         int posiX, posiY;
         void SetPosi(int x, int y);
-        void (*init)(Entity *entity);
-        Action (*act)(Entity *entity);
+        void (*init)(Entity &entity);
+        Action (*act)(Entity &entity);
 };
 
 #endif

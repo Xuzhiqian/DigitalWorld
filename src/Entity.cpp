@@ -9,21 +9,21 @@ Entity::Entity(const char *name) {
     if (!handle) {
         crash("failed loading shared library");
     }
-    init = (void(*)(Entity*))dlsym(handle, "init");
-    act = (Action(*)(Entity*))dlsym(handle, "act");
+    init = (void(*)(Entity&))dlsym(handle, "init");
+    act = (Action(*)(Entity&))dlsym(handle, "act");
     if (!handle) {
         crash("invalid shared library for entity");
     }
 
-    init(this);
-    this->energy = 0;
+    init(*this);
+    this->energy = 100;
 }
 
 Entity::~Entity() {
 }
 
 Action Entity::Act() {
-    return act(this);
+    return act(*this);
 }
 
 void Entity::SetPosi(int x, int y) {
