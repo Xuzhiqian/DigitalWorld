@@ -28,3 +28,8 @@ void Entity::SetPosition(int x, int y) {
     posiX = x;
     posiY = y;
 }
+
+void Entity::SensePosition(int &x, int &y) {
+    x = posiX;
+    y = posiY;
+}

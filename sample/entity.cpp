@@ -16,7 +16,7 @@ extern "C" Action act(Entity &entity) {
     Action action;
     int x, y;
     entity.SensePosition(x, y);
-    if (y > 0) {
+    if (x > 0) {
         action.type = Move;
         action.param.direction = Left;
     } else {

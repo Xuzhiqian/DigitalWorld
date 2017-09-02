@@ -50,8 +50,7 @@ int World::CreateEntity(const char *name) {
     // Set interface functions
     entity.SenseEnergy = [this](int x, int y){ return this->GetEnergy(x, y); };
     entity.SenseHeight = [this](int x, int y){ return this->GetHeight(x, y); };
-    entity.SensePosition = [&entity](int &x, int &y){ x = entity.posiX, y = entity.posiY;};
-    entity.SenseWorldSize = [this](int &x, int &y){ GetSize(x, y);};
+    entity.SenseWorldSize = [this](int &x, int &y){ this->GetSize(x, y);};
     
     entity.init(entity);
 
@@ -90,8 +89,11 @@ void World::TakeActionMove(Entity &entity, int dx, int dy) {
             && !grids[tx][ty].occupied) {
         grids[tx][ty].occupied = true;
         grids[entity.posiX][entity.posiY].occupied = false;
+
         entity.energy -= config::move_cost(grids[tx][ty].height - grids[entity.posiX][entity.posiY].height);
         entity.SetPosition(tx, ty);
+
+        entity.SensePosition(tx, ty);
     }
 }
 
