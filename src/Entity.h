@@ -10,10 +10,6 @@ class Entity {
         Entity(const char *name);
         ~Entity();
 
-        Action Act();
-
-        void SetPosi(int x, int y);
-
         std::function<int(int, int)> SenseEnergy;
         std::function<int(int, int)> SenseHeight;
         std::function<void(int&, int&)> SensePosition;
@@ -25,6 +21,8 @@ class Entity {
         void (*init)(Entity &entity);
         Action (*act)(Entity &entity);
 
+        Action Act();
+        void SetPosi(int x, int y);
         
         friend class World;
 };
