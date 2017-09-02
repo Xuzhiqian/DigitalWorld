@@ -3,7 +3,7 @@
 #include "World.h"
 #include "util.h"
 
-World::World(const char *name) {
+World::World(const char *name, int max_x, int max_y) {
     void *handle = dlopen(name, RTLD_LAZY);
     if (!handle) {
         crash("failed loading shared library");
@@ -14,7 +14,11 @@ World::World(const char *name) {
         crash("invalid shared library for world");
     }
     dlclose(handle);
+    
+    this->max_x = max_x;
+    this->max_y = max_y;
 
+    grids = vector< vector<Grid> >(max_x, vector<Grid>(max_y));
     init(this);
 }
 
