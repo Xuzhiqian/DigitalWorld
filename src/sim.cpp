@@ -18,6 +18,7 @@ void ShowWorld(const World &world) {
 int main() {
     World world("./worlds/default.so");
     world.CreateEntity("./entities/default.so");
+    world.CreateEntity("./entities/default2.so");
     while(true) {
         world.Update();
         ShowWorld(world);
