@@ -10,7 +10,7 @@ class Grid {
     public:
         int energy;
         int height;
-        vector<Entity> entities;
+        bool occupied;
     private:
 };
 

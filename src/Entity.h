@@ -10,7 +10,8 @@ class Entity {
         Action Act();
 
         int energy;
-        int posi_x, posi_y;
+        int posiX, posiY;
+        void SetPosi(int x, int y);
         void (*init)(Entity *entity);
         Action (*act)(Entity *entity);
 };

@@ -16,6 +16,7 @@ Entity::Entity(const char *name) {
     }
 
     init(this);
+    this->energy = 0;
 }
 
 Entity::~Entity() {
@@ -23,4 +24,9 @@ Entity::~Entity() {
 
 Action Entity::Act() {
     return act(this);
+}
+
+void Entity::SetPosi(int x, int y) {
+    posiX = x;
+    posiY = y;
 }

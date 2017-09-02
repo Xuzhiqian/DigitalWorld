@@ -9,16 +9,19 @@ using namespace std;
 
 class World {
     public:
-        World(const char *name, int max_x, int max_y);
+        World(const char *name);
         ~World();
         void Update();
-        int maxX, maxY;
+        int sizeX, sizeY;
         void (*init)(World *world);
         void (*update)(World *world);
         vector< vector<Grid> > grids;
         vector< Entity > entities;
         int CreateEntity(const char *name);
-        void TakeAction(Entity entity, Action action);
+        void TakeAction(Entity &entity, Action action);
+        void SetSize(int sizeX, int sizeY);
+        void TakeActionMove(Entity &entity, int dx, int dy);
+        void TakeActionEat(Entity &entity);
 };
 
 #endif
