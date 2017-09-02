@@ -5,6 +5,9 @@
 
 int main() {
     World world("./worlds/default.so", 0, 0);
-    Entity entity("./entities/default.so");
+    world.CreateEntity("./entities/default.so");
+    for (int i = 0; i < 10; ++i) {
+        world.Update();
+    }
     return 0;
 }

@@ -1,6 +1,7 @@
 #include <dlfcn.h>
 
 #include "Entity.h"
+#include "Action.h"
 #include "utils.h"
 
 Entity::Entity(const char *name) {
@@ -9,7 +10,7 @@ Entity::Entity(const char *name) {
         crash("failed loading shared library");
     }
     init = (void(*)(Entity*))dlsym(handle, "init");
-    act = (void(*)(Entity*))dlsym(handle, "act");
+    act = (Action(*)(Entity*))dlsym(handle, "act");
     if (!handle) {
         crash("invalid shared library for entity");
     }
@@ -20,6 +21,6 @@ Entity::Entity(const char *name) {
 Entity::~Entity() {
 }
 
-void Entity::Act() {
-    act(this);
+Action Entity::Act() {
+    return act(this);
 }

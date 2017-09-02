@@ -1,6 +1,7 @@
 #include <dlfcn.h>
 
 #include "World.h"
+#include "Action.h"
 #include "utils.h"
 
 World::World(const char *name, int max_x, int max_y) {
@@ -25,4 +26,22 @@ World::~World() {
 
 void World::Update() {
     update(this);
+    for (auto e: entities) {
+        Action action = e.Act();
+        take_action(e, action);
+    }
+    log("world updated");
+}
+
+int World::CreateEntity(const char *name) {
+    entities.push_back(Entity(name));
+}
+
+void World::take_action(Entity entity, Action action) {
+    switch(action.type) {
+        case Move:
+            break;
+        case Eat:
+            break;
+    }
 }
