@@ -13,9 +13,6 @@ void ShowWorld(const World &world) {
         }
         putchar('\n');
     }
-    for (auto e: world.GetEntities()) {
-        cout << e.energy << endl;
-    }
 }
 
 int main() {

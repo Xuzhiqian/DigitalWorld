@@ -15,8 +15,7 @@ World::World(const char *name) {
     if (!init || !update) {
         crash("invalid shared library for world");
     }
-    init(*this);
-}
+    init(*this); }
 
 World::~World() {
 }
@@ -41,6 +40,10 @@ int World::CreateEntity(const char *name) {
     } while(grids[x][y].occupied);
     grids[x][y].occupied = true;
     entity.SetPosi(x, y);
+   
+    entity.energy = config::initial_energy;
+    entity.SenseEnergy = [this](int x, int y){ return this->GetEnergy(x, y); };
+
     entities.push_back(entity);
 }
 

@@ -17,7 +17,6 @@ Entity::Entity(const char *name) {
     }
 
     init(*this);
-    this->energy = config::initial_energy;
 }
 
 Entity::~Entity() {
