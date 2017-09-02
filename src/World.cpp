@@ -1,7 +1,7 @@
 #include <dlfcn.h>
 
 #include "World.h"
-#include "util.h"
+#include "utils.h"
 
 World::World(const char *name, int max_x, int max_y) {
     void *handle = dlopen(name, RTLD_LAZY);
@@ -10,14 +10,12 @@ World::World(const char *name, int max_x, int max_y) {
     }
     init = (void(*)(World*))dlsym(handle, "init");
     update = (void(*)(World*))dlsym(handle, "update");
-    if (!handle) {
+    if (!init || !update) {
         crash("invalid shared library for world");
     }
-    dlclose(handle);
-    
     this->max_x = max_x;
     this->max_y = max_y;
-
+    
     grids = vector< vector<Grid> >(max_x, vector<Grid>(max_y));
     init(this);
 }

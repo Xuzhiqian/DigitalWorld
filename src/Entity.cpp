@@ -1,7 +1,7 @@
 #include <dlfcn.h>
 
 #include "Entity.h"
-#include "util.h"
+#include "utils.h"
 
 Entity::Entity(const char *name) {
     void *handle = dlopen(name, RTLD_LAZY);

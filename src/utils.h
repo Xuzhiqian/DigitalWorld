@@ -7,8 +7,8 @@ using namespace std;
 
 #include "config.h"
 
-extern void log(const char *message);
+extern "C" void log(const char *message);
 
-extern void crash(const char *message);
+extern "C" void crash(const char *message);
 
 #endif
