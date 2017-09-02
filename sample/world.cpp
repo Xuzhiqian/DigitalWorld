@@ -1,7 +1,8 @@
 #include "../src/utils.h"
-#include "../src/World.h"
+#include "../src/WorldAPI.h"
 
 extern "C" void init(World *world) {
+    world_get_info(world);
     log("default world initialized");
 }
 

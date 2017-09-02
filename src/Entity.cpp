@@ -13,7 +13,6 @@ Entity::Entity(const char *name) {
     if (!handle) {
         crash("invalid shared library for entity");
     }
-    dlclose(handle);
 
     init(this);
 }
