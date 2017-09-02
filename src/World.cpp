@@ -48,6 +48,8 @@ int World::CreateEntity(const char *name) {
     entity.SenseHeight = [this](int x, int y){ return this->GetHeight(x, y); };
     entity.SensePosition = [&entity](int &x, int &y){ x = entity.posiX, y = entity.posiY;};
     entity.SenseWorldSize = [this](int &x, int &y){ GetSize(x, y);};
+    
+    entity.init(entity);
 
     entities.push_back(entity);
 }
