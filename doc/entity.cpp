@@ -41,7 +41,7 @@ extern "C" Action act(Entity &entity) {
     // 移动
     action.type = Move;
     action.param.direction = Up | Down | Left | Right;
-    // 吃  掉你所在位置的全部能量（注意可能是负的哦）
+    // 吃  掉你所在位置的全部能量（注意可能是负的23333）
     action.type = Eat;
 
     return action;
