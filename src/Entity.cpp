@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Action.h"
 #include "utils.h"
+#include "config.h"
 
 Entity::Entity(const char *name) {
     void *handle = dlopen(name, RTLD_LAZY);
@@ -16,7 +17,7 @@ Entity::Entity(const char *name) {
     }
 
     init(*this);
-    this->energy = 100;
+    this->energy = config::initial_energy;
 }
 
 Entity::~Entity() {

@@ -4,11 +4,11 @@
 
 #include <cstdlib>
 
-extern "C" void init(Entity *entity) {
+extern "C" void init(Entity &entity) {
     log("default entity initialized");
 }
 
-extern "C" Action act(Entity *entity) {
+extern "C" Action act(Entity &entity) {
     Action action;
     switch (rand()%2) {
         case 0:

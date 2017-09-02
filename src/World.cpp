@@ -2,6 +2,7 @@
 
 #include "World.h"
 #include "Action.h"
+#include "config.h"
 #include "utils.h"
 
 World::World(const char *name) {
@@ -23,6 +24,8 @@ World::~World() {
 void World::Update() {
     update(*this);
     for (auto &e: entities) {
+        if (e.energy <= 0) continue;
+        e.energy -= config::update_cost;
         Action action = e.Act();
         TakeAction(e, action);
     }
@@ -73,8 +76,8 @@ void World::TakeActionMove(Entity &entity, int dx, int dy) {
             && !grids[tx][ty].occupied) {
         grids[tx][ty].occupied = true;
         grids[entity.posiX][entity.posiY].occupied = false;
+        entity.energy -= config::move_cost(grids[tx][ty].height - grids[entity.posiX][entity.posiY].height);
         entity.SetPosi(tx, ty);
-        entity.energy -= 5;
     }
 }
 

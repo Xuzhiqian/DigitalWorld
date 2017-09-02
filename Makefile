@@ -6,7 +6,7 @@ CXXFLAGS=-g -rdynamic
 
 all: sim .sample
 
-sim: src/sim.cpp src/World.cpp src/Entity.cpp src/utils.cpp src/WorldAPI.cpp src/EntityAPI.cpp
+sim: src/sim.cpp src/World.cpp src/Entity.cpp src/utils.cpp src/WorldAPI.cpp src/EntityAPI.cpp src/config.cpp
 	mkdir -p $(BUILD_DIR)
 	$(CXX) -o $(BUILD_DIR)/$@ $(CXXFLAGS) -ldl $^
 
