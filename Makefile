@@ -4,7 +4,7 @@ CXX=g++
 CXXFLAGS=-g -rdynamic
 BUILD_DIR=./build
 SRC_DIR=./src
-SERVER_DIR=$(SRC_DIR)/server
-CLIENT_DIR=$(SRC_DIR)/client
+SIMULATOR_DIR=$(SRC_DIR)/simulator
+MONITOR_DIR=$(SRC_DIR)/monitor
 
-all: server client
+all: $(BUILD_DIR)/simulator $(BUILD_DIR)/monitor
