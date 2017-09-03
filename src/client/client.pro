@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2017-09-03T01:28:36
+# Project created by QtCreator 2017-09-03T22:43:02
 #
 #-------------------------------------------------
 
@@ -8,7 +8,7 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = GUi
+TARGET = client
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
