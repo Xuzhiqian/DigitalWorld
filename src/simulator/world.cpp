@@ -1,7 +1,7 @@
 #include <dlfcn.h>
 
-#include "World.h"
-#include "Action.h"
+#include "world.h"
+#include "action.h"
 #include "config.h"
 #include "utils.h"
 

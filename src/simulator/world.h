@@ -4,8 +4,8 @@
 #include <vector>
 using namespace std;
 
-#include "Grid.h"
-#include "Entity.h"
+#include "grid.h"
+#include "entity.h"
 
 class World {
     public:

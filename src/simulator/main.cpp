@@ -12,5 +12,12 @@ int main(int argc, char *argv[]) {
         crash("");
     }
 
+    World world(argv[1]);
+    for (int i = 2; i < argc; ++i)
+        world.CreateEntity(argv[i]);
+
+    while (1)
+        world.Update();
+
     return 0;
 }

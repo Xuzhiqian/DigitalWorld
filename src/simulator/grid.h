@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-#include "Entity.h"
+#include "entity.h"
 
 class Grid {
     public:

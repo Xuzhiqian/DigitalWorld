@@ -1,7 +1,7 @@
 #include <dlfcn.h>
 
-#include "Entity.h"
-#include "Action.h"
+#include "entity.h"
+#include "action.h"
 #include "utils.h"
 #include "config.h"
 
