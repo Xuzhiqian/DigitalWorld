@@ -9,7 +9,7 @@ int main(int argc, char *argv[]) {
         cout << "Usage: " << argv[0] << " " 
             << "world_name.so" << " "
             << "entity_name.so..." << endl;
-        crash("");
+        exit(-1);
     }
 
     World world(argv[1]);

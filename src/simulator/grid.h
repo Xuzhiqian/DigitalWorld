@@ -8,6 +8,8 @@ using namespace std;
 
 class Grid {
     public:
+        Grid();
+
         int energy;
         int height;
         bool occupied;
