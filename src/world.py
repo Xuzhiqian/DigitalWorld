@@ -40,6 +40,8 @@ class World:
         for en in entity_names:
             self.create_entity(en)
 
+        self.time = 0
+
 
     def init(self):
         '''Do some neccessary initialization, and then call user_init.
@@ -52,10 +54,11 @@ class World:
 
 
     def update(self):
-        '''Do some necessary update, and then call user_update.
+        '''Do some neccessary update, and then call user_update.
 
         '''
-        # No neccerary update for now
+        # Neccessary updates
+        self.time += 1
 
         # Update by user
         self.user_update(self.interface)
