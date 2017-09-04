@@ -3,7 +3,10 @@
 '''
 
 import importlib
+import random
+
 import entity
+import config
 
 class WorldInterface:
     pass
@@ -25,11 +28,11 @@ class World:
         self.user_init = tmp.init
         self.user_update = tmp.update
 
-        # Initialize the world        
+        # Initialize the world
         self.init()
 
         # Delete interfaces that should only be used in initialization
-        del(self.interface.set_size)
+        del self.interface.set_size
 
         # Create entities
         # It will be appended to self.entities in self.create_entity, so don't worry
@@ -50,7 +53,7 @@ class World:
 
     def update(self):
         '''Do some necessary update, and then call user_update.
-        
+
         '''
         # No neccerary update for now
 
@@ -65,11 +68,19 @@ class World:
         en = entity.Entity(entity_name)
 
         # Set initial position and energy
-        
-        self.entities.append(en)
-        
+        # Don't wanna judge if there is any position empty for now
+        while True:
+            x = random.randint(self.size[0])
+            y = random.randint(self.size[1])
+            if not self.occupied[x][y]:
+                en.set_pos(x, y)
+                self.occupied[x][y] = True
+                break
+        en.set_energy(config.initial_energy())
 
-    
+        self.entities.append(en)
+
+
     def set_size(self, sx, sy):
         '''Set world size to (sx, sy) and reset height and energy to 0 at each position.
 
@@ -77,7 +88,8 @@ class World:
         self.size = (sx, sy)
         self.height = [[0]*sy]*sx
         self.energy = [[0]*sy]*sx
-    
+        self.occupied = [[False]*sy]*sx
+
 
     def get_size(self):
         return self.size
@@ -85,15 +97,15 @@ class World:
 
     def set_height(self, x, y, h):
         self.height[x][y] = h
-    
-    
+
+
     def get_height(self, x, y):
         return self.height[x][y]
 
 
     def set_energy(self, x, y, e):
         self.energy[x][y] = e
-    
+
 
     def get_energy(self, x, y):
         return self.energy[x][y]
