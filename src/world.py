@@ -11,7 +11,7 @@ class WorldInterface:
 
 class World:
     def __init__(self, world_name, entity_names):
-        # Construct a world interface for initialization
+        # Construct world interface
         self.interface = WorldInterface()
         self.interface.set_size = self.set_size
         self.interface.get_size = self.get_size
@@ -32,6 +32,7 @@ class World:
         del(self.interface.set_size)
 
         # Create entities
+        # It will be appended to self.entities in self.create_entity, so don't worry
         self.entities = []
         for en in entity_names:
             self.create_entity(en)
@@ -55,6 +56,18 @@ class World:
 
         # Update by user
         self.user_update(self.interface)
+
+
+    def create_entity(self, entity_name):
+        '''Create an entity by name.
+
+        '''
+        en = entity.Entity(entity_name)
+
+        # Set initial position and energy
+        
+        self.entities.append(en)
+        
 
     
     def set_size(self, sx, sy):
