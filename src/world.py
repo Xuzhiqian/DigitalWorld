@@ -7,6 +7,7 @@ import entity
 class WorldInterface:
     pass
 
+
 class World:
     def __init__(self, world_name, entity_names):
         # Construct a world interface for initialization

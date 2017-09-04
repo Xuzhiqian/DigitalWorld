@@ -5,7 +5,7 @@
 import world as wd
 
 def main():
-    world = wd.World("default", ["default"])
+    world = wd.World("default", [])
     while True:
         world.update()
 
