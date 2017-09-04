@@ -4,6 +4,8 @@
 #include <vector>
 using namespace std;
 
+#include "mainwindow.h"
+
 #include "grid.h"
 #include "entity.h"
 
@@ -13,7 +15,7 @@ class World {
         ~World();
 
         void Update();
-        int CreateEntity(const char *name);
+        void CreateEntity(const char *name);
 
         void SetSize(int sizeX, int sizeY);
         void SetHeight(int x, int y, int height);
@@ -37,6 +39,8 @@ class World {
         void TakeAction(Entity &entity, Action action);
         void TakeActionMove(Entity &entity, int dx, int dy);
         void TakeActionEat(Entity &entity);
+
+        friend class MainWindow;
 };
 
 #endif

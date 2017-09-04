@@ -35,7 +35,7 @@ void World::Update() {
     }
 }
 
-int World::CreateEntity(const char *name) {
+void World::CreateEntity(const char *name) {
     Entity entity(name);
     int x, y;
     do {
