@@ -2,6 +2,7 @@
 
 '''
 
+import importlib
 import entity
 
 class WorldInterface:
@@ -20,8 +21,9 @@ class World:
         self.interface.get_energy = self.get_energy
 
         # Load user defined functions
-        self.user_init = __import__("worlds.{0}.init".format(world_name))
-        self.user_update = __import__("worlds.{0}.update".format(world_name))
+        tmp = importlib.import_module("worlds.{0}.main".format(world_name))
+        self.user_init = tmp.init
+        self.user_update = tmp.update
 
         # Initialize the world        
         self.init()
