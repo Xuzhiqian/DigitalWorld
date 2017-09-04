@@ -2,7 +2,6 @@
 
 '''
 
-import config
 import entity
 
 class WorldInterface:
@@ -11,26 +10,49 @@ class WorldInterface:
 class World:
     def __init__(self, world_name, entity_names):
         # Construct a world interface for initialization
-        wi = WorldInterface()
-        wi.set_size = self.set_size
-        wi.get_size = self.get_size
-        wi.set_height = self.set_height
-        wi.get_height = self.get_height
-        wi.set_energy = self.set_energy
-        wi.get_energy = self.get_energy
- 
-        # Init the world using user defined function
-        self.init = __import__("worlds.{0}.init".format(world_name))
-        self.init(wi)
+        self.interface = WorldInterface()
+        self.interface.set_size = self.set_size
+        self.interface.get_size = self.get_size
+        self.interface.set_height = self.set_height
+        self.interface.get_height = self.get_height
+        self.interface.set_energy = self.set_energy
+        self.interface.get_energy = self.get_energy
+
+        # Load user defined functions
+        self.user_init = __import__("worlds.{0}.init".format(world_name))
+        self.user_update = __import__("worlds.{0}.update".format(world_name))
+
+        # Initialize the world        
+        self.init()
+
+        # Delete interfaces that should only be used in initialization
+        del(self.interface.set_size)
 
         # Create entities
         self.entities = []
         for en in entity_names:
             self.create_entity(en)
+
+
+    def init(self):
+        '''Do some neccessary initialization, and then call user_init.
+
+        '''
+        # No neccerary initialization for now
+
+        # Initialize by user
+        self.user_init(self.interface)
+
+
+    def update(self):
+        '''Do some necessary update, and then call user_update.
         
-        # Load the user defined update function
-        self.update = __import__("worlds.{0}.update".format(world_name))
-    
+        '''
+        # No neccerary update for now
+
+        # Update by user
+        self.user_update(self.interface)
+
     
     def set_size(self, sx, sy):
         '''Set world size to (sx, sy) and reset height and energy to 0 at each position.
@@ -59,6 +81,3 @@ class World:
 
     def get_energy(self, x, y):
         return self.energy[x][y]
-    
-    
-    
