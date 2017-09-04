@@ -63,6 +63,10 @@ class World:
         # Update by user
         self.user_update(self.interface)
 
+        # Let every entity act
+        for e in self.entities:
+            e.act()
+
 
     def create_entity(self, entity_name):
         '''Create an entity by name.
@@ -75,14 +79,18 @@ class World:
         while True:
             x = random.randint(self.size[0])
             y = random.randint(self.size[1])
-            if not self.occupied[x][y]:
+            if self.entity[x][y] is None:
                 en.set_pos(x, y)
-                self.occupied[x][y] = True
+                self.entity[x][y] = True
                 break
         en.set_energy(config.initial_energy())
+        self.create_entity_interface(en)
 
         self.entities.append(en)
 
+
+    def create_entity_interface(self, en):
+        en.interface = entity.EntityInterface()
 
     def set_size(self, sx, sy):
         '''Set world size to (sx, sy) and reset height and energy to 0 at each position.
@@ -91,7 +99,7 @@ class World:
         self.size = (sx, sy)
         self.height = [[0]*sy]*sx
         self.energy = [[0]*sy]*sx
-        self.occupied = [[False]*sy]*sx
+        self.entity = [[None]*sy]*sx
 
 
     def get_size(self):
