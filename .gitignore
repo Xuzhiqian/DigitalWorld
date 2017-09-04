@@ -1,2 +1,3 @@
 build/
 src/build-client-Desktop-Debug/
+*__pycache__/
