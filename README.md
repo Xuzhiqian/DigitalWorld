@@ -9,7 +9,7 @@
 
 # 游戏方式
 用户通过编写程序控制个体的行动规则，也可以通过编写程序自定义世界的初始化和更新规则。
-在[doc](https://github.com/faultrit/DigitalWorld/tree/master/doc)下查看相应的说明。
+在'src/worlds/default/'及'src/entities/default'下查看示例。
 
 # 其他
 由于时间关系，这个项目将会开发得**非常慢** :)
