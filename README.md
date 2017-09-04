@@ -12,4 +12,4 @@
 在[doc](https://github.com/faultrit/DigitalWorld/tree/master/doc)下查看相应的说明。
 
 # 其他
-由于时间关系，这个项目将会开发得非常慢 :)
+由于时间关系，这个项目将会开发得**非常慢** :)
