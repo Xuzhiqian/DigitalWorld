@@ -94,7 +94,7 @@ class World:
         # Sensors
         en.interface.sense_height = pack(self.act_sense_height)
         en.interface.sense_energy = pack(self.act_sense_energy)
-        en.interface.sense_size = pack(self.act_sense_size)
+        en.interface.sense_world_size = pack(self.act_sense_world_size)
 
     def set_size(self, sx, sy):
         """Set world size to (sx, sy) and reset height and energy to 0 at each position."""
@@ -133,11 +133,14 @@ class World:
     def act_move_right(self, en):
         pass
 
-    def act_sense_size(self, en):
+    def act_sense_world_size(self, en):
         pass
 
     def act_sense_energy(self, en):
         pass
 
     def act_sense_height(self, en):
+        pass
+
+    def act_sense_pos(self, en):
         pass
