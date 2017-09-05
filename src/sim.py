@@ -1,8 +1,7 @@
-'''This is the simulator.
-
-'''
+"""This is the simulator."""
 
 import world as wd
+
 
 def main():
     world = wd.World("default", ["default"])

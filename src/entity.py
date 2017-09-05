@@ -1,8 +1,7 @@
-'''Define Entity class.
-
-'''
+"""Define Entity class."""
 
 import importlib
+
 
 class EntityInterface:
     pass
@@ -10,6 +9,9 @@ class EntityInterface:
 
 class Entity:
     def __init__(self, entity_name):
+        # Define vars
+        self.energy = None
+        self.pos = None
         # Create entity interface
         # But this will be filled by world
         # It's quite consistent with the reality, right?
@@ -23,14 +25,11 @@ class Entity:
         # Call user init
         self.user_init(self.interface)
 
-
     def act(self):
         self.user_act(self.interface)
 
-
     def set_pos(self, x, y):
         self.pos = (x, y)
-
 
     def set_energy(self, e):
         self.energy = e
