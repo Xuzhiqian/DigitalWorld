@@ -1,9 +1,11 @@
-'''This is a default world for test.
+'''This is a default world for test as well as tutorial.
 
 '''
 
 def init(wi):
-    pass
+    # You have to set world size
+    wi.set_size(10, 10)
+
 
 def update(wi):
     pass

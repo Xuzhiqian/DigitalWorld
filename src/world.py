@@ -4,6 +4,7 @@
 
 import importlib
 import random
+import functools
 
 import entity
 import config
@@ -77,8 +78,8 @@ class World:
         # Set initial position and energy
         # Don't wanna judge if there is any position empty for now
         while True:
-            x = random.randint(self.size[0])
-            y = random.randint(self.size[1])
+            x = random.randint(0, self.size[0]-1)
+            y = random.randint(0, self.size[1]-1)
             if self.entity[x][y] is None:
                 en.set_pos(x, y)
                 self.entity[x][y] = True
@@ -91,6 +92,21 @@ class World:
 
     def create_entity_interface(self, en):
         en.interface = entity.EntityInterface()
+        # For convenience
+        def pack(f):
+            return functools.partial(f, en=en)
+        # Actions
+        # I don't think this is a beautiful implementation
+        en.interface.move_up = pack(self.act_move_up)
+        en.interface.move_down = pack(self.act_move_down)
+        en.interface.move_left = pack(self.act_move_left)
+        en.interface.move_right = pack(self.act_move_right)
+        en.interface.eat = pack(self.act_eat)
+        # Sensors
+        en.interface.sense_height = pack(self.act_sense_height)
+        en.interface.sense_energy = pack(self.act_sense_energy)
+        en.interface.sense_size = pack(self.act_sense_size)
+
 
     def set_size(self, sx, sy):
         '''Set world size to (sx, sy) and reset height and energy to 0 at each position.
@@ -120,3 +136,34 @@ class World:
 
     def get_energy(self, x, y):
         return self.energy[x][y]
+
+    
+    def act_eat(self, en):
+        pass
+
+
+    def act_move_up(self, en):
+        pass
+
+    
+    def act_move_down(self, en):
+        pass
+
+
+    def act_move_left(self, en):
+        pass
+
+
+    def act_move_right(self, en):
+        pass
+
+
+    def act_sense_size(self, en):
+        pass
+
+    def act_sense_energy(self, en):
+        pass
+
+
+    def act_sense_height(self, en):
+        pass
