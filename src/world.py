@@ -120,28 +120,53 @@ class World:
         return self.energy[x][y]
 
     def act_eat(self, en):
-        pass
+        x, y = en.pos
+        en.set_energy(en.energy+self.energy[x][y])
+        self.energy[x][y] = 0
 
     def act_move_up(self, en):
-        pass
+        x, y = en.pos
+        if y==0:
+            return
+        en.set_pos(x, y-1)
+        self.entity[x][y-1] = en
+        self.entity[x][y] = None
 
     def act_move_down(self, en):
-        pass
+        x, y = en.pos
+        if y == self.size[1]-1:
+            return
+        en.set_pos(x, y+1)
+        self.entity[x][y+1] = en
+        self.entity[x][y] = None
 
     def act_move_left(self, en):
-        pass
+        x, y = en.pos
+        if x == 0:
+            return
+        en.set_pos(x-1, y)
+        self.entity[x-1][y] = en
+        self.entity[x][y] = None
 
     def act_move_right(self, en):
-        pass
+        x, y=en.pos
+        if x == self.size[0]-1:
+            return
+        en.set_pos(x+1,y)
+        self.entity[x+1][y] = en
+        self.entity[x][y] = None
 
     def act_sense_world_size(self, en):
-        pass
+        return self.size
 
     def act_sense_energy(self, en):
-        pass
+        x, y = en.pos
+        return self.energy[x][y]
 
     def act_sense_height(self, en):
-        pass
+        x, y=en.pos
+        return self.height[x][y]
 
     def act_sense_pos(self, en):
-        pass
+        return en.pos
+
