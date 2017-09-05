@@ -15,11 +15,11 @@ class WorldInterface:
 class World:
     def __init__(self, world_name, entity_names):
         # Define vars
-        self.size = None
-        self.entities = None
-        self.energy = None
-        self.height = None
-        self.entity = None
+        self.size = None  # (int, int), the size of the world
+        self.entities = None  # [], the entities in the world
+        self.energy = None  # [[int]], the energy at each position
+        self.height = None  # [[int]], the height at each position
+        self.entity = None  # [[entity]], the entity at each position
         # Construct world interface
         self.interface = WorldInterface()
         self.interface.set_size = self.set_size
@@ -71,7 +71,7 @@ class World:
             y = random.randint(0, self.size[1]-1)
             if self.entity[x][y] is None:
                 en.set_pos(x, y)
-                self.entity[x][y] = True
+                self.entity[x][y] = en
                 break
         en.set_energy(config.initial_energy())
         self.create_entity_interface(en)
@@ -100,9 +100,9 @@ class World:
     def set_size(self, sx, sy):
         """Set world size to (sx, sy) and reset height and energy to 0 at each position."""
         self.size = (sx, sy)
-        self.height = [[0]*sy]*sx
-        self.energy = [[0]*sy]*sx
-        self.entity = [[None]*sy]*sx
+        self.height = [[0 for y in range(sy)] for x in range(sx)]
+        self.energy = [[0 for y in range(sy)] for x in range(sx)]
+        self.entity = [[None for y in range(sy)] for x in range(sx)]
 
     def get_size(self):
         return self.size
