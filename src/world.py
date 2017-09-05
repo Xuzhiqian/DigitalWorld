@@ -128,6 +128,8 @@ class World:
         x, y = en.pos
         if y==0:
             return
+        if self.entity[x][y-1]!=None:
+            return
         en.set_pos(x, y-1)
         self.entity[x][y-1] = en
         self.entity[x][y] = None
@@ -135,6 +137,8 @@ class World:
     def act_move_down(self, en):
         x, y = en.pos
         if y == self.size[1]-1:
+            return
+        if self.entity[x][y+1]!=None:
             return
         en.set_pos(x, y+1)
         self.entity[x][y+1] = en
@@ -144,6 +148,8 @@ class World:
         x, y = en.pos
         if x == 0:
             return
+        if self.entity[x-1][y]!=None:
+            return
         en.set_pos(x-1, y)
         self.entity[x-1][y] = en
         self.entity[x][y] = None
@@ -151,6 +157,8 @@ class World:
     def act_move_right(self, en):
         x, y=en.pos
         if x == self.size[0]-1:
+            return
+        if self.entity[x+1][y]!=None:
             return
         en.set_pos(x+1,y)
         self.entity[x+1][y] = en
