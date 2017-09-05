@@ -36,7 +36,7 @@ def init(wi):
     for y in range(size_y):
         for x in range(size_x):
             wi.set_height(x, y, randint(0, 10))
-            wi.set_energy(x, y, randint(-10, 10))
+            wi.set_energy(x, y, x+y)
 
 
 def update(wi):
