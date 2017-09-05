@@ -1,6 +1,5 @@
-'''This is the default entity for test.
+"""This is the default entity for test."""
 
-'''
 
 def init(ei):
     pass
