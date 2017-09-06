@@ -22,6 +22,9 @@
 ## 创建你的entity
 为你的个体取一个名字entity_name，在src/entities/下创建名为entity_name的文件夹。
 你应该在entity_name文件夹下编写你的个体（的初始化和更新规则）。程序将根据entity_name/main.py中的init及act函数初始化和运行个体。
+## 然后呢
+执行monitor.py。
+
 
 # 注意
 目前尚未完成基础的开发工作，个体将不会损失能量，程序启动后自动加载default世界和entity并运行。
