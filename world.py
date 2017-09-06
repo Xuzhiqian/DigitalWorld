@@ -126,8 +126,12 @@ class World:
 
     def act_move_up(self, en):
         x, y = en.pos
-        if y==0 or self.entity[x][y-1] is not None:
+        if y == 0 or self.entity[x][y-1] is not None:
             return
+        cost = hyper_param.energy_cost_height(self.height[x][y] - self.height[x][y-1])
+        if en.energy < cost:
+            return
+        en.energy -= cost
         en.set_pos(x, y-1)
         self.entity[x][y-1] = en
         self.entity[x][y] = None
@@ -136,6 +140,10 @@ class World:
         x, y = en.pos
         if y == self.size[1]-1 or self.entity[x][y+1] is not None:
             return
+        cost = hyper_param.energy_cost_height(self.height[x][y] - self.height[x][y+1])
+        if en.energy < cost:
+            return
+        en.energy -= cost
         en.set_pos(x, y+1)
         self.entity[x][y+1] = en
         self.entity[x][y] = None
@@ -144,6 +152,10 @@ class World:
         x, y = en.pos
         if x == 0 or self.entity[x-1][y] is not None:
             return
+        cost = hyper_param.energy_cost_height(self.height[x][y] - self.height[x-1][y])
+        if en.energy < cost:
+            return
+        en.energy -= cost
         en.set_pos(x-1, y)
         self.entity[x-1][y] = en
         self.entity[x][y] = None
@@ -152,6 +164,10 @@ class World:
         x, y=en.pos
         if x == self.size[0]-1 or self.entity[x+1][y] is not None:
             return
+        cost = hyper_param.energy_cost_height(self.height[x][y] - self.height[x+1][y])
+        if en.energy < cost:
+            return
+        en.energy -= cost
         en.set_pos(x+1,y)
         self.entity[x+1][y] = en
         self.entity[x][y] = None
@@ -167,4 +183,3 @@ class World:
 
     def act_sense_pos(self, en):
         return en.pos
-
