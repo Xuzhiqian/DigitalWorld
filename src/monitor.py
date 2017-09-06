@@ -16,7 +16,11 @@ class MonitorConfig:
     grid_boarder_color = (0, 0, 0)
 
     @staticmethod
-    def grid_fill_color(e):
+    def grid_fill_color(h):
+        return max(0, min(h*10, 255)), max(0, min(h*10, 255)), max(0, min(h*10, 255))
+
+    @staticmethod
+    def energy_fill_color(e):
         return 0, 0, max(0, min(e*10, 255))
 
     entity_boarder_color = (0, 0, 255)
@@ -64,13 +68,26 @@ class Monitor(QMainWindow):
 
     def redraw(self):
         self.graphics_scene.clear()
+        # Draw grids
         for y in range(self.world.size[1]):
             for x in range(self.world.size[0]):
                 self.graphics_scene.addRect(x * MonitorConfig.grid_width, y * MonitorConfig.grid_height,
                                             MonitorConfig.grid_width, MonitorConfig.grid_height,
                                             QPen(QColor(*MonitorConfig.grid_boarder_color)),
-                                            QBrush(QColor(*MonitorConfig.grid_fill_color(self.world.energy[x][y])))
+                                            QBrush(QColor(*MonitorConfig.grid_fill_color(self.world.height[x][y])))
                                             )
+        # Draw energy
+        for y in range(self.world.size[1]):
+            for x in range(self.world.size[0]):
+                if self.world.energy[x][y] != 0:
+                    self.graphics_scene.addRect(x * MonitorConfig.grid_width + MonitorConfig.grid_width/4,
+                                                y * MonitorConfig.grid_height + MonitorConfig.grid_height/4,
+                                                MonitorConfig.grid_width / 2, MonitorConfig.grid_height / 2,
+                                                QPen(QColor(*MonitorConfig.grid_boarder_color)),
+                                                QBrush(QColor(*MonitorConfig.energy_fill_color(self.world.energy[x][y])))
+                                                )
+
+        # Draw entities
         for y in range(self.world.size[1]):
             for x in range(self.world.size[0]):
                 if self.world.entity[x][y] is None:
