@@ -5,7 +5,7 @@ import random
 import functools
 
 import entity
-import config
+import hyper_param
 
 
 class WorldInterface:
@@ -73,7 +73,7 @@ class World:
                 en.set_pos(x, y)
                 self.entity[x][y] = en
                 break
-        en.set_energy(config.initial_energy())
+        en.set_energy(hyper_param.initial_energy())
         self.create_entity_interface(en)
         # Save current entity
         self.entities.append(en)

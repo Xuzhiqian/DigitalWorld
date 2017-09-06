@@ -7,6 +7,7 @@ from PyQt5 import QtCore
 import math
 
 import world as wd
+import hyper_param
 
 
 class MonitorConfig:
@@ -14,20 +15,22 @@ class MonitorConfig:
     grid_width = 50
     grid_height = 50
     grid_boarder_color = (0, 0, 0)
-
-    @staticmethod
-    def grid_fill_color(h):
-        tmp = int(255/(1+math.exp(-h/10)))
-        return tmp, tmp, tmp
-
-    @staticmethod
-    def energy_fill_color(e):
-        return 0, 0, max(0, min(e*10, 255))
-
+    height_aprox = hyper_param.height_aprox
+    energy_aprox = hyper_param.energy_aprox
     entity_boarder_color = (0, 0, 255)
     entity_fill_color = (255, 255, 0)
     redraw_interval = 1000/24
     world_update_interval = 200
+
+    @staticmethod
+    def grid_fill_color(h):
+        tmp = int(255/(1+math.exp(-h/hyper_param.height_aprox)))
+        return tmp, tmp, tmp
+
+    @staticmethod
+    def energy_fill_color(e):
+        tmp = int(255/(1+math.exp(-abs(e)/hyper_param.energy_aprox)))
+        return (255, 0, 0, tmp) if e < 0 else (0, 0, 255, tmp)
 
 
 class WorldThread(QtCore.QThread):
