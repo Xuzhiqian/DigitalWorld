@@ -10,7 +10,7 @@ import world as wd
 
 
 class MonitorConfig:
-    monitor_size = (800, 600)
+    monitor_size = (1280, 960)
     grid_width = 50
     grid_height = 50
     grid_boarder_color = (0, 0, 0)

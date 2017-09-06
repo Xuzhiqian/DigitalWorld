@@ -23,8 +23,8 @@ Available methods in wi is listed below, the ones marked by * means that you can
 
 from random import randint
 
-size_x = 10
-size_y = 10
+size_x = 20
+size_y = 15
 
 
 def init(wi):
