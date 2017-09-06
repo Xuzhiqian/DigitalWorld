@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import QtCore
-
+import math
 
 import world as wd
 
@@ -17,7 +17,8 @@ class MonitorConfig:
 
     @staticmethod
     def grid_fill_color(h):
-        return max(0, min(h*10, 255)), max(0, min(h*10, 255)), max(0, min(h*10, 255))
+        tmp = int(255/(1+math.exp(-h/10)))
+        return tmp, tmp, tmp
 
     @staticmethod
     def energy_fill_color(e):
