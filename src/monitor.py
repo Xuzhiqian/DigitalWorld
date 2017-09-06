@@ -69,13 +69,14 @@ class Monitor(QMainWindow):
                 self.graphics_scene.addRect(x * MonitorConfig.grid_width, y * MonitorConfig.grid_height,
                                             MonitorConfig.grid_width, MonitorConfig.grid_height,
                                             QPen(QColor(*MonitorConfig.grid_boarder_color)),
-                                            QBrush(QColor(*MonitorConfig.grid_fill_color(self.world.energy[x][y]))))
+                                            QBrush(QColor(*MonitorConfig.grid_fill_color(self.world.energy[x][y])))
+                                            )
         for y in range(self.world.size[1]):
             for x in range(self.world.size[0]):
                 if self.world.entity[x][y] is None:
                     continue
-                self.graphics_scene.addEllipse(x * MonitorConfig.grid_width, y * MonitorConfig.grid_height,
-                                               MonitorConfig.grid_width, MonitorConfig.grid_height,
+                self.graphics_scene.addEllipse(x * MonitorConfig.grid_width + 1, y * MonitorConfig.grid_height + 1,
+                                               MonitorConfig.grid_width - 2, MonitorConfig.grid_height - 2,
                                                QPen(QColor(*MonitorConfig.entity_boarder_color)),
                                                QBrush(QColor(*MonitorConfig.entity_fill_color))
                                                )
