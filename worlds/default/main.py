@@ -22,6 +22,7 @@ Available methods in wi is listed below, the ones marked by * means that you can
 """
 
 from random import randint
+import math
 
 size_x = 20
 size_y = 15
@@ -35,11 +36,9 @@ def init(wi):
     # Default is all 0
     for y in range(size_y):
         for x in range(size_x):
-            wi.set_height(x, y, randint(0, 10))
-            wi.set_energy(x, y, x+y)
+            wi.set_height(x, y, int(math.sqrt(x*x + y*y)))
+            wi.set_energy(x, y, int(math.sqrt(x*x + y*y)))
 
 
 def update(wi):
-    for y in range(size_y):
-        for x in range(size_x):
-            wi.set_energy(x, y, wi.get_energy(x, y)+randint(0, 1))
+    pass

@@ -18,7 +18,6 @@ class MonitorConfig:
     height_aprox = hyper_param.height_aprox
     energy_aprox = hyper_param.energy_aprox
     entity_boarder_color = (0, 0, 255)
-    entity_fill_color = (255, 255, 0)
     redraw_interval = 1000/24
     world_update_interval = 200
 
@@ -30,7 +29,11 @@ class MonitorConfig:
     @staticmethod
     def energy_fill_color(e):
         tmp = int(255/(1+math.exp(-abs(e)/hyper_param.energy_aprox)))
-        return (255, 0, 0, tmp) if e < 0 else (0, 0, 255, tmp)
+        return (tmp, 0, 0) if e < 0 else (0, 0, tmp)
+
+    @staticmethod
+    def entity_fill_color(en):
+        return (255, 0, 0) if en.energy <= 0 else (255, 255, 0)
 
 
 class WorldThread(QtCore.QThread):
@@ -83,13 +86,12 @@ class Monitor(QMainWindow):
         # Draw energy
         for y in range(self.world.size[1]):
             for x in range(self.world.size[0]):
-                if self.world.energy[x][y] != 0:
-                    self.graphics_scene.addEllipse(x * MonitorConfig.grid_width + MonitorConfig.grid_width/4,
-                                                y * MonitorConfig.grid_height + MonitorConfig.grid_height/4,
-                                                MonitorConfig.grid_width / 2, MonitorConfig.grid_height / 2,
-                                                QPen(QColor(*MonitorConfig.grid_boarder_color)),
-                                                QBrush(QColor(*MonitorConfig.energy_fill_color(self.world.energy[x][y])))
-                                                )
+                self.graphics_scene.addEllipse(x * MonitorConfig.grid_width + MonitorConfig.grid_width/4,
+                                               y * MonitorConfig.grid_height + MonitorConfig.grid_height/4,
+                                               MonitorConfig.grid_width / 2, MonitorConfig.grid_height / 2,
+                                               QPen(QColor(*MonitorConfig.grid_boarder_color)),
+                                               QBrush(QColor(*MonitorConfig.energy_fill_color(self.world.energy[x][y])))
+                                               )
 
         # Draw entities
         for y in range(self.world.size[1]):
@@ -99,13 +101,13 @@ class Monitor(QMainWindow):
                 self.graphics_scene.addEllipse(x * MonitorConfig.grid_width + 1, y * MonitorConfig.grid_height + 1,
                                                MonitorConfig.grid_width - 2, MonitorConfig.grid_height - 2,
                                                QPen(QColor(*MonitorConfig.entity_boarder_color)),
-                                               QBrush(QColor(*MonitorConfig.entity_fill_color))
+                                               QBrush(QColor(*MonitorConfig.entity_fill_color(self.world.entity[x][y])))
                                                )
 
 
 def main():
     app = QApplication(sys.argv)
-    world = wd.World("default", ["default"]*3)
+    world = wd.World("default", ["default"]*5)
     m = Monitor(world)
     m.show()
 

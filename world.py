@@ -59,7 +59,10 @@ class World:
         self.user_update(self.interface)
         # Let every entity act
         for e in self.entities:
+            if e.energy <= 0:
+                continue
             e.act()
+            e.energy -= hyper_param.energy_cost_per_update
 
     def create_entity(self, entity_name):
         """Create an entity by name."""
