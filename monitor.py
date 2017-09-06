@@ -107,7 +107,7 @@ class Monitor(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    world = wd.World("default", ["default"]*5)
+    world = wd.World("default", ["default"])
     m = Monitor(world)
     m.show()
 
