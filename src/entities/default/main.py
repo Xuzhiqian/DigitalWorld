@@ -45,6 +45,5 @@ def act(ei):
                             else ei.sense_energy(x, y+1))
         i = argmax(energy_around)
         return int(i)
-    print(foraging())
     exec('ei.move_'+direction[foraging()]+'()')
     ei.eat()
