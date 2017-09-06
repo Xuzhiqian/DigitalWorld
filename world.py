@@ -123,7 +123,7 @@ class World:
     def get_energy(self, x, y):
         return self.energy[x][y]
 
-    @hyper_param.limit_call_times
+    # @hyper_param.limit_call_times
     def act_eat(self, en):
         x, y = en.pos
         en.set_energy(en.energy+self.energy[x][y])

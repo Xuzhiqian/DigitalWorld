@@ -37,8 +37,10 @@ def act(ei):
         x, y = ei.sense_pos()
         from numpy import argmax
         energy_around = [0, 0, 0, 0]
-        energy_around[2] = (float('-inf') if x == 0 else ei.sense_energy(x-1, y))
-        energy_around[0] = (float('-inf') if y == 0 else ei.sense_energy(x, y-1))
+        energy_around[2] = (float('-inf') if x == 0
+                            else ei.sense_energy(x-1, y))
+        energy_around[0] = (float('-inf') if y == 0
+                            else ei.sense_energy(x, y-1))
         energy_around[3] = (float('-inf') if x == ei.sense_world_size()[0]-1
                             else ei.sense_energy(x+1, y))
         energy_around[1] = (float('-inf') if y == ei.sense_world_size()[1]-1

@@ -1,6 +1,9 @@
 """Configuration such as initial energy."""
 
 
+import utils
+
+
 height_aprox = 255
 energy_aprox = 255
 
@@ -16,11 +19,12 @@ energy_cost_per_update = 10
 
 default_call_time_limit = 1
 
+
 def limit_call_times(f):
     def wrapper(*args, **kwargs):
-        en = args[-1]
+        en = kwargs['en']
         if en.call_time_limit <= 0:
             return
         en.call_time_limit -= 1
-        f(args, kwargs)
-    return f
+        f(*args, **kwargs)
+    return wrapper
