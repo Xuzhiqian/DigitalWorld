@@ -61,6 +61,7 @@ class World:
         for e in self.entities:
             if e.energy <= 0:
                 continue
+            e.call_time_limit = hyper_param.default_call_time_limit
             e.act()
             e.energy -= hyper_param.energy_cost_per_update
 
@@ -122,11 +123,13 @@ class World:
     def get_energy(self, x, y):
         return self.energy[x][y]
 
+    @hyper_param.limit_call_times
     def act_eat(self, en):
         x, y = en.pos
         en.set_energy(en.energy+self.energy[x][y])
         self.energy[x][y] = 0
 
+    @hyper_param.limit_call_times
     def act_move_up(self, en):
         x, y = en.pos
         if y == 0 or self.entity[x][y-1] is not None:
@@ -139,6 +142,7 @@ class World:
         self.entity[x][y-1] = en
         self.entity[x][y] = None
 
+    @hyper_param.limit_call_times
     def act_move_down(self, en):
         x, y = en.pos
         if y == self.size[1]-1 or self.entity[x][y+1] is not None:
@@ -151,6 +155,7 @@ class World:
         self.entity[x][y+1] = en
         self.entity[x][y] = None
 
+    @hyper_param.limit_call_times
     def act_move_left(self, en):
         x, y = en.pos
         if x == 0 or self.entity[x-1][y] is not None:
@@ -163,6 +168,7 @@ class World:
         self.entity[x-1][y] = en
         self.entity[x][y] = None
 
+    @hyper_param.limit_call_times
     def act_move_right(self, en):
         x, y=en.pos
         if x == self.size[0]-1 or self.entity[x+1][y] is not None:

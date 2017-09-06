@@ -10,8 +10,9 @@ class EntityInterface:
 class Entity:
     def __init__(self, entity_name):
         # Define vars
-        self.energy = None
+        self.energy = 0
         self.pos = None
+        self.call_time_limit = 0
         # Create entity interface
         # But this will be filled by world
         # It's quite consistent with the reality, right?
