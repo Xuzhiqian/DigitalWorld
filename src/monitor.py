@@ -24,8 +24,8 @@ class MonitorConfig:
         return 0, 0, max(0, min(e*10, 255))
 
     entity_boarder_color = (0, 0, 255)
-    entity_fill_color = (0, 0, 255)
-    redraw_interval = 1000/60
+    entity_fill_color = (255, 255, 0)
+    redraw_interval = 1000/24
     world_update_interval = 200
 
 
@@ -80,7 +80,7 @@ class Monitor(QMainWindow):
         for y in range(self.world.size[1]):
             for x in range(self.world.size[0]):
                 if self.world.energy[x][y] != 0:
-                    self.graphics_scene.addRect(x * MonitorConfig.grid_width + MonitorConfig.grid_width/4,
+                    self.graphics_scene.addEllipse(x * MonitorConfig.grid_width + MonitorConfig.grid_width/4,
                                                 y * MonitorConfig.grid_height + MonitorConfig.grid_height/4,
                                                 MonitorConfig.grid_width / 2, MonitorConfig.grid_height / 2,
                                                 QPen(QColor(*MonitorConfig.grid_boarder_color)),
@@ -101,7 +101,7 @@ class Monitor(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    world = wd.World("default", ["default", "default"])
+    world = wd.World("default", ["default"]*3)
     m = Monitor(world)
     m.show()
 
