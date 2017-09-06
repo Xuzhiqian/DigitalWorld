@@ -14,11 +14,15 @@ class MonitorConfig:
     grid_width = 50
     grid_height = 50
     grid_boarder_color = (0, 0, 0)
-    grid_fill_color = (255, 255, 255)
+
+    @staticmethod
+    def grid_fill_color(e):
+        return 0, 0, max(0, min(e*10, 255))
+
     entity_boarder_color = (0, 0, 255)
     entity_fill_color = (0, 0, 255)
     redraw_interval = 1000/60
-    world_update_interval = 500
+    world_update_interval = 200
 
 
 class WorldThread(QtCore.QThread):
@@ -65,7 +69,7 @@ class Monitor(QMainWindow):
                 self.graphics_scene.addRect(x * MonitorConfig.grid_width, y * MonitorConfig.grid_height,
                                             MonitorConfig.grid_width, MonitorConfig.grid_height,
                                             QPen(QColor(*MonitorConfig.grid_boarder_color)),
-                                            QBrush(QColor(*MonitorConfig.grid_fill_color)))
+                                            QBrush(QColor(*MonitorConfig.grid_fill_color(self.world.energy[x][y]))))
         for y in range(self.world.size[1]):
             for x in range(self.world.size[0]):
                 if self.world.entity[x][y] is None:
@@ -79,7 +83,7 @@ class Monitor(QMainWindow):
 
 def main():
     app = QApplication(sys.argv)
-    world = wd.World("default", ["default"])
+    world = wd.World("default", ["default", "default"])
     m = Monitor(world)
     m.show()
 

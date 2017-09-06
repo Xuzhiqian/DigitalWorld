@@ -42,4 +42,4 @@ def init(wi):
 def update(wi):
     for y in range(size_y):
         for x in range(size_x):
-            wi.set_energy(x, y, wi.get_energy(x, y)+1)
+            wi.set_energy(x, y, wi.get_energy(x, y)+(x+y)%2)
