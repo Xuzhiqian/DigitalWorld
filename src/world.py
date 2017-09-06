@@ -126,7 +126,7 @@ class World:
 
     def act_move_up(self, en):
         x, y = en.pos
-        if y==0:
+        if y==0 or self.entity[x][y-1] is not None:
             return
         en.set_pos(x, y-1)
         self.entity[x][y-1] = en
@@ -134,7 +134,7 @@ class World:
 
     def act_move_down(self, en):
         x, y = en.pos
-        if y == self.size[1]-1:
+        if y == self.size[1]-1 or self.entity[x][y+1] is not None:
             return
         en.set_pos(x, y+1)
         self.entity[x][y+1] = en
@@ -142,7 +142,7 @@ class World:
 
     def act_move_left(self, en):
         x, y = en.pos
-        if x == 0:
+        if x == 0 or self.entity[x-1][y] is not None:
             return
         en.set_pos(x-1, y)
         self.entity[x-1][y] = en
@@ -150,7 +150,7 @@ class World:
 
     def act_move_right(self, en):
         x, y=en.pos
-        if x == self.size[0]-1:
+        if x == self.size[0]-1 or self.entity[x+1][y] is not None:
             return
         en.set_pos(x+1,y)
         self.entity[x+1][y] = en
@@ -159,12 +159,10 @@ class World:
     def act_sense_world_size(self, en):
         return self.size
 
-    def act_sense_energy(self, en):
-        x, y = en.pos
+    def act_sense_energy(self, x, y, en):
         return self.energy[x][y]
 
-    def act_sense_height(self, en):
-        x, y=en.pos
+    def act_sense_height(self, x, y, en):
         return self.height[x][y]
 
     def act_sense_pos(self, en):

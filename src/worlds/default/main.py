@@ -21,6 +21,8 @@ Available methods in wi is listed below, the ones marked by * means that you can
         return the energy at (x, y)
 """
 
+from random import randint
+
 size_x = 10
 size_y = 10
 
@@ -33,8 +35,8 @@ def init(wi):
     # Default is all 0
     for y in range(size_y):
         for x in range(size_x):
-            wi.set_height(x, y, 1)
-            wi.set_energy(x, y, 10)
+            wi.set_height(x, y, randint(0, 10))
+            wi.set_energy(x, y, x+y)
 
 
 def update(wi):
