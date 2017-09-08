@@ -19,7 +19,7 @@ class MonitorConfig:
     energy_aprox = hyper_param.energy_aprox
     entity_boarder_color = (0, 0, 255)
     redraw_interval = 1000/24
-    world_update_interval = 200
+    world_update_interval = 50
 
     @staticmethod
     def grid_fill_color(h):
