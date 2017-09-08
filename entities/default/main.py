@@ -25,6 +25,9 @@ Available methods in ei is listed below, unfortunately, you can only call them i
         eat all the energy in the current position
 """
 
+from numpy import argmax, where
+from random import choice
+
 
 def init(ei):
     pass
@@ -35,7 +38,6 @@ def act(ei):
 
     def foraging():
         x, y = ei.sense_pos()
-        from numpy import argmax
         energy_around = [0, 0, 0, 0]
         energy_around[2] = (float('-inf') if x == 0
                             else ei.sense_energy(x-1, y))
@@ -46,6 +48,6 @@ def act(ei):
         energy_around[1] = (float('-inf') if y == ei.sense_world_size()[1]-1
                             else ei.sense_energy(x, y+1))
         i = argmax(energy_around)
-        return int(i)
+        return choice([j for j in range(4) if energy_around[j] == energy_around[i]])
     exec('ei.move_'+direction[foraging()]+'()')
     ei.eat()
