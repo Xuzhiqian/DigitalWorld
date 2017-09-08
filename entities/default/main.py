@@ -26,11 +26,11 @@ Available methods in ei is listed below, unfortunately, you can only call them i
 """
 
 from numpy import argmax, where
-from random import choice
+from random import choice, seed
 
 
 def init(ei):
-    pass
+    seed(15)
 
 
 def act(ei):
