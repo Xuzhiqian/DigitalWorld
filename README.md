@@ -26,6 +26,10 @@
 ## 然后呢
 执行monitor.py。
 
+# 效果预览
+
+![](./snapshots/snapshot1.png)
+
 # 注意
 目前尚未完成基础的开发工作，程序启动后自动加载default世界和entity并运行。
 需要安装pyqt5。
