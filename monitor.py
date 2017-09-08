@@ -4,14 +4,14 @@ import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5 import QtCore
-import math
+from PyQt5.Qt import Qt
 
 import world as wd
 import hyper_param
 
 
 class MonitorConfig:
-    monitor_size = (1280, 960)
+    monitor_size = (960, 960)
     grid_width = 50
     grid_height = 50
     grid_boarder_color = (0, 0, 0)
@@ -19,17 +19,18 @@ class MonitorConfig:
     energy_aprox = hyper_param.energy_aprox
     entity_boarder_color = (0, 0, 255)
     redraw_interval = 1000/24
+    retable_interval = 1000
     world_update_interval = 50
 
     @staticmethod
     def grid_fill_color(h):
-        tmp = abs(h)
+        tmp = min(abs(h)/2, 127) * (1 if h > 0 else -1) + 128
         return tmp, tmp, tmp
 
     @staticmethod
     def energy_fill_color(e):
         tmp = abs(e)
-        return (tmp, 0, 0) if e < 0 else (0, 0, tmp)
+        return (min(255, tmp), 0, 0) if e < 0 else (0, 0, min(255, tmp))
 
     @staticmethod
     def entity_fill_color(en):
@@ -59,19 +60,37 @@ class Monitor(QMainWindow):
 
         self.world = world
         self.graphics_view = QGraphicsView(self)
+        self.table_view = QTableView(self)
         self.graphics_scene = QGraphicsScene(self)
-        self.timer = QtCore.QTimer(self)
+        self.redraw_timer = QtCore.QTimer(self)
+        self.retable_timer = QtCore.QTimer(self)
+        self.refresh_time = 0
 
         self.init_ui()
 
     def init_ui(self):
-        self.timer.setInterval(MonitorConfig.redraw_interval)
+        self.redraw_timer.setInterval(MonitorConfig.redraw_interval)
+        self.retable_timer.setInterval(MonitorConfig.retable_interval)
         self.graphics_view.setGeometry(0, 0, MonitorConfig.monitor_size[0], MonitorConfig.monitor_size[1])
         self.graphics_view.setScene(self.graphics_scene)
-        self.redraw()
+        self.graphics_view.fitInView(0, 0,
+                                     self.world.size[0] * 1.3,  # Well, 1.5 is set by experiments
+                                     self.world.size[1] * 1.3,  # I don't quite understand this api
+                                     Qt.KeepAspectRatio
+                                     )
+        self.table_view.setGeometry(MonitorConfig.monitor_size[0] + 10,
+                                   0,
+                                   400,
+                                   MonitorConfig.monitor_size[1])
         # Connect timer and redraw
-        self.timer.timeout.connect(self.redraw)
-        self.timer.start()
+        self.redraw_timer.timeout.connect(self.redraw)
+        self.redraw_timer.start()
+        self.retable_timer.timeout.connect(self.retable)
+        self.retable_timer.start()
+
+    def refresh(self):
+        self.redraw()
+        self.retable()
 
     def redraw(self):
         self.graphics_scene.clear()
@@ -104,9 +123,18 @@ class Monitor(QMainWindow):
                                                QBrush(QColor(*MonitorConfig.entity_fill_color(self.world.entity[x][y])))
                                                )
 
+    def retable(self):
+        model = QStandardItemModel(self.table_view)
+        idx = [QStandardItem(str(i)) for i in range(len(self.world.entities))]
+        eng = [QStandardItem(str(e.energy)) for e in self.world.entities]
+        model.appendColumn(idx)
+        model.appendColumn(eng)
+        self.table_view.setModel(model)
+
 
 def main():
     app = QApplication(sys.argv)
+
     world = wd.World("default", ["default"]*2)
     m = Monitor(world)
     m.show()

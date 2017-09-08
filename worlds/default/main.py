@@ -24,8 +24,8 @@ Available methods in wi is listed below, the ones marked by * means that you can
 from random import randint
 import math
 
-size_x = 20
-size_y = 15
+size_x = 25
+size_y = 25
 
 
 def init(wi):
