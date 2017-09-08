@@ -9,15 +9,15 @@ energy_aprox = 255
 
 
 def initial_energy():
-    return 2500
+    return 100
 
 
-def energy_cost_height(h):
-    return (h*h+1) if h >= 0 else int(0.5*h*h+1)
+def energy_cost_height(dh):
+    return abs(dh)
 
-energy_cost_per_update = 10
+energy_cost_per_update = 2
 
-default_call_time_limit = 1
+default_call_time_limit = 2
 
 
 def limit_call_times(f):

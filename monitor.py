@@ -23,12 +23,12 @@ class MonitorConfig:
 
     @staticmethod
     def grid_fill_color(h):
-        tmp = int(255/(1+math.exp(-h/hyper_param.height_aprox)))
+        tmp = abs(h)
         return tmp, tmp, tmp
 
     @staticmethod
     def energy_fill_color(e):
-        tmp = int(255/(1+math.exp(-abs(e)/hyper_param.energy_aprox)))
+        tmp = abs(e)
         return (tmp, 0, 0) if e < 0 else (0, 0, tmp)
 
     @staticmethod
