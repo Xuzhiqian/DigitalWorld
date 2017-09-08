@@ -36,8 +36,8 @@ def init(wi):
     # Default is all 0
     for y in range(size_y):
         for x in range(size_x):
-            wi.set_height(x, y, int(math.sqrt(x*x + y*y)))
-            wi.set_energy(x, y, int(math.sqrt(x*x + y*y)))
+            wi.set_height(x, y, 3*x + 2*y)
+            wi.set_energy(x, y, 5*(size_x-x) + 4*(size_y-y))
 
 
 def update(wi):
